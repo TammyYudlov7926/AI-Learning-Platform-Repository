@@ -4,7 +4,8 @@ import { getAIResponse } from '../services/openai.service';
 
 export const createPrompt = async (req: Request, res: Response) => {
   try {
-    const { userId, categoryId, subCategoryId, prompt } = req.body;
+    const userId = (req as any).user?.userId;
+    const { categoryId, subCategoryId, prompt } = req.body;
 
     if (!userId || !categoryId || !subCategoryId || !prompt) {
       return res.status(400).json({ message: 'All fields are required' });
@@ -28,6 +29,8 @@ export const createPrompt = async (req: Request, res: Response) => {
   }
 };
 
+
+
 export const getUserPrompts = async (req: Request, res: Response) => {
   try {
     const userId = Number(req.params.userId);
@@ -41,4 +44,8 @@ export const getUserPrompts = async (req: Request, res: Response) => {
     res.status(500).json({ message: errorMessage });
   }
 };
+
+
+
+
 

@@ -1,0 +1,30 @@
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+.buttons .btn,
+.buttons .btn-outline {
+  padding: 12px 24px;
+  margin: 0 8px;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.btn {
+  background: #ffa726;
+  color: black;
+}
+.btn-outline {
+  border: 2px solid #ffa726;
+  color: #ffa726;
+}

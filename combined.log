@@ -1,0 +1,75 @@
+2025-07-15T09:05:32.978Z [WARN]: Failed login attempt for phone 0548540737
+2025-07-15T09:05:51.529Z [WARN]: Failed login attempt for phone 0548540737
+2025-07-15T09:05:53.368Z [WARN]: Failed login attempt for phone 0548540737
+2025-07-15T09:18:15.504Z [ERROR]: Login error for phone 0548540737: Error: secretOrPrivateKey must have a value
+2025-07-15T09:18:15.510Z [ERROR]: Unhandled error: secretOrPrivateKey must have a value
+2025-07-15T09:19:01.351Z [ERROR]: Login error for phone 0548540737: Error: secretOrPrivateKey must have a value
+2025-07-15T09:19:01.352Z [ERROR]: Unhandled error: secretOrPrivateKey must have a value
+2025-07-15T09:20:41.579Z [INFO]: User 2 logged in
+2025-07-15T10:15:56.281Z [WARN]: Invalid token: JsonWebTokenError: invalid token
+2025-07-15T10:19:32.696Z [INFO]: User 1 logged in
+2025-07-15T10:20:36.203Z [WARN]: Missing or invalid Authorization header
+2025-07-15T10:21:02.867Z [WARN]: Invalid token: JsonWebTokenError: invalid token
+2025-07-15T10:21:24.464Z [WARN]: Invalid token: JsonWebTokenError: invalid token
+2025-07-15T10:21:32.166Z [WARN]: Invalid token: JsonWebTokenError: invalid token
+2025-07-15T10:22:40.801Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:23:47.588Z [WARN]: Missing or invalid Authorization header
+2025-07-15T10:23:58.708Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:25:09.770Z [INFO]: User 1 logged in
+2025-07-15T10:27:16.078Z [WARN]: Invalid token: JsonWebTokenError: invalid token
+2025-07-15T10:28:40.985Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:30:35.339Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:30:36.933Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:33:46.883Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:34:30.272Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:34:31.770Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:34:33.358Z [WARN]: User 1 attempted to access admin route
+2025-07-15T10:35:23.011Z [WARN]: Invalid token: JsonWebTokenError: jwt must be provided
+2025-07-15T10:37:29.411Z [WARN]: Invalid token: JsonWebTokenError: jwt must be provided
+2025-07-15T10:37:30.910Z [WARN]: Invalid token: JsonWebTokenError: jwt must be provided
+2025-07-15T10:37:32.440Z [WARN]: Invalid token: JsonWebTokenError: jwt must be provided
+2025-07-15T10:37:38.487Z [WARN]: Invalid token: JsonWebTokenError: jwt must be provided
+2025-07-15T10:37:48.420Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T10:39:36.212Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T10:39:37.780Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T10:40:38.615Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T10:59:35.456Z [INFO]: User 1 logged in
+2025-07-15T11:09:10.280Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:09:15.357Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:09:59.518Z [INFO]: User 1 logged in
+2025-07-15T11:12:31.897Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:12:33.913Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:12:49.222Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:12:50.668Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:12:52.156Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:13:01.450Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:13:02.750Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:14:13.965Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:14:15.278Z [WARN]: Invalid token: JsonWebTokenError: jwt malformed
+2025-07-15T11:17:32.333Z [INFO]: Authorized admin
+2025-07-15T11:17:32.524Z [INFO]: Admin fetched prompts for user 1
+2025-07-15T11:17:53.210Z [INFO]: Authorized admin
+2025-07-15T11:17:53.215Z [INFO]: Admin listed all users
+2025-07-15T13:49:18.576Z [INFO]: User 1 logged in
+2025-07-15T13:49:50.242Z [INFO]: User 1 logged in
+2025-07-15T13:50:03.073Z [WARN]: Failed login attempt for phone 0583287926
+2025-07-15T13:50:19.684Z [INFO]: User 2 logged in
+2025-07-15T13:50:52.841Z [WARN]: Failed login attempt for phone chavi
+2025-07-15T13:50:55.189Z [WARN]: Failed login attempt for phone chavi
+2025-07-15T13:54:02.729Z [INFO]: User 2 logged in
+2025-07-15T13:54:14.495Z [INFO]: User 1 logged in
+2025-07-15T14:57:07.155Z [INFO]: User 3 logged in
+2025-07-15T15:18:00.925Z [WARN]: Failed login attempt for phone 058328793
+2025-07-15T15:18:06.328Z [WARN]: Failed login attempt for phone 058328793
+2025-07-15T15:18:55.854Z [INFO]: User 5 logged in
+2025-07-15T15:47:34.060Z [INFO]: User 3 logged in
+2025-07-15T15:47:48.771Z [INFO]: User 1 logged in
+2025-07-15T15:54:40.045Z [INFO]: User 3 logged in
+2025-07-15T16:12:42.802Z [WARN]: Invalid token: TokenExpiredError: jwt expired
+2025-07-16T10:17:19.647Z [INFO]: User 3 logged in
+2025-07-16T12:34:13.568Z [WARN]: Invalid token: TokenExpiredError: jwt expired
+2025-07-16T12:34:41.770Z [WARN]: Invalid token: TokenExpiredError: jwt expired
+2025-07-16T12:37:42.703Z [INFO]: User 3 logged in
+2025-07-16T12:50:30.328Z [INFO]: User 3 logged in
+2025-07-16T14:44:24.111Z [INFO]: User 3 logged in
+2025-07-16T14:45:39.568Z [INFO]: User 3 logged in
