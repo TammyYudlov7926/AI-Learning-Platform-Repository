@@ -29,21 +29,20 @@ export const createPrompt = async (req: Request, res: Response) => {
   }
 };
 
-
-
-export const getUserPrompts = async (req: Request, res: Response) => {
+export const getUserPromptsByPhone = async (req: Request, res: Response) => {
   try {
-    const userId = Number(req.params.userId);
-    if (!userId) return res.status(400).json({ message: 'UserId is required' });
+    const phone = req.params.phone;
+    if (!phone) return res.status(400).json({ message: 'Phone number is required' });
 
-    const prompts = await promptService.getUserPrompts(userId);
+    const prompts = await promptService.getUserPromptsByPhone(phone);
     res.json(prompts);
   } catch (error) {
-    console.error('Error fetching prompts:', error);
+    console.error('Error fetching prompts by phone:', error);
     const errorMessage = error instanceof Error ? error.message : 'Internal server error';
     res.status(500).json({ message: errorMessage });
   }
 };
+
 
 
 

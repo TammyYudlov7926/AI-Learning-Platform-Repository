@@ -10,10 +10,16 @@ const getAuthHeaders = () => {
   };
 };
 
+
 export const registerUser = async (name: string, phone: string, password: string) => {
-  const response = await axios.post(`${API_URL}/users`, { name, phone, password });
+  const response = await axios.post(`${API_URL}/users/register`, {
+    name,
+    phone,
+    password,
+  });
   return response.data;
 };
+
 
 export const loginUser = async (phone: string, password: string) => {
   const response = await axios.post(`${API_URL}/auth/login`, { phone, password });
@@ -50,7 +56,7 @@ export const createPrompt = async (
   return response.data;
 };
 
-export const getUserPrompts = async (userId: number) => {
+export const getUserPrompts = async (userId: string) => {
   const response = await axios.get(`${API_URL}/prompts/user/${userId}`, getAuthHeaders());
   return response.data;
 };

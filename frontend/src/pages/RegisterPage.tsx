@@ -17,25 +17,23 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      // 1. שליחת רישום לשרת
-      await registerUser(name, phone, password);
-
-      // 2. ניסיון להתחבר מיד אחרי רישום
-      const { token, role } = await loginUser(phone, password);
-
-      // 3. שמירה ב-Redux וב-localStorage
-      dispatch(loginSuccess({ token, role, phone }));
-
-      // 4. הפניה לפי רול
-      if (role === 'ADMIN') navigate('/admin');
-      else navigate('/user');
-    } catch (err) {
-      console.error(err);
+  e.preventDefault();
+  try {
+    await registerUser(name, phone, password);
+    const { token, role } = await loginUser(phone, password);
+    dispatch(loginSuccess({ token, role, phone }));
+    if (role === 'ADMIN') navigate('/admin');
+    else navigate('/ask');
+  } catch (err: any) {
+    console.error(err);
+    if (err.response?.status === 409) {
+      setError('This phone number is already registered.');
+    } else {
       setError('Registration failed or login failed');
     }
-  };
+  }
+};
+;
 
   return (
     <div className="auth-outer-wrapper">

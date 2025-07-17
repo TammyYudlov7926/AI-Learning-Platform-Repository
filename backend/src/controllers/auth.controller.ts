@@ -21,6 +21,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       process.env.JWT_SECRET!,
       { expiresIn: '1h' }
     );
+   console.log('JWT_SECRET FROM ENV:', process.env.JWT_SECRET);
 
     logger.info(`User ${user.id} logged in`);
     res.json({ token, role: user.role });

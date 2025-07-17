@@ -1,5 +1,5 @@
-
 version: '3.8'
+
 services:
   db:
     image: postgres:15
@@ -14,18 +14,29 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     restart: always
     depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://myuser:mypass@db:5432/learning_db
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - JWT_SECRET=${JWT_SECRET}
+    - db
+    env_file:
+    - ./backend/.env
     ports:
-      - "8000:8000"
+    - "8000:8000"
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
     volumes:
-      - ./backend:/app
+      - ./frontend:/app
+    stdin_open: true
+    tty: true
 
 volumes:
   pgdata:

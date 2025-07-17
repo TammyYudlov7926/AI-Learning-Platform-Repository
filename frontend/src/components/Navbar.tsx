@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { logout } from '../features/user/userSlice';
-import '../styles/Navbar.css'; 
+import '../styles/Navbar.css';
+
 const Navbar: React.FC = () => {
-     const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { phone, role, token } = useSelector((state: RootState) => state.user);
 
@@ -15,36 +16,43 @@ const Navbar: React.FC = () => {
   };
 
   const isLoggedIn = !!token;
-return (
-<nav className="navbar">
-<h1 className="logo">📚 Learning Platform</h1>
-<ul className="nav-links">
-<li><Link to="/">Home</Link></li>
 
-        {!isLoggedIn && (
+  return (
+    <nav className="navbar">
+      <Link to="/" className="logo">AI Learning</Link>
+
+      {isLoggedIn && (
+        <div className="nav-center">
+          <Link to="/history">History</Link>
+          <Link to="/settings">Settings</Link>
+          <Link to="/ask">Ask AI</Link>
+         
+
+
+{role === 'ADMIN' && (
+  <>
+    <Link to="/admin/profile">Admin</Link>
+    <Link to="/admin">Dashboard</Link>
+  </>
+)}
+        </div>
+      )}
+
+      <div className="nav-right">
+        {isLoggedIn ? (
           <>
-            <li><Link to="/register">Register</Link></li>
-            
-            <li><Link to="/login">Login</Link></li>
+            <span className="user-info">👤 {phone}</span>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
           </>
         )}
-          {isLoggedIn && (
-          <>
-          
-          <li><Link to="/ask">Ask AI</Link></li>
-            {role === 'ADMIN' && (
-              <li><Link to="/admin">Admin Dashboard</Link></li>
-           
-            )}
-            <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
-            <li className="user-info">👤 {phone}</li>
-          </>
-        )}
-      </ul>
+      </div>
     </nav>
   );
-}
-
+};
 
 export default Navbar;
-

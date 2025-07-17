@@ -20,9 +20,16 @@ export const createPrompt = async (
   });
 };
 
-export const getUserPrompts = async (userId: number) => {
+export const getUserPromptsByPhone = async (phone: string) => {
+  const user = await prisma.user.findUnique({
+    where: { phone },
+    select: { id: true },
+  });
+
+  if (!user) return [];
+
   return await prisma.prompt.findMany({
-    where: { userId },
+    where: { userId: user.id },
     orderBy: { createdAt: 'desc' },
     include: {
       category: true,
