@@ -11,20 +11,25 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import HistoryPage from './pages/HistoryPage';
 import './styles/toast.css';
+import UserProfile from './components/auth/UserProfile';
+import Hero from './components/Hero';
+
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<div style={{ padding: '2rem' }}><h2>ברוך הבא!</h2></div>} />
+        <Route path="/user/profile" element={<UserProfile />} />
+
+        <Route path="/" element={<Hero />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-         <Route path="/ask" element={<ProtectedRoute><AskQuestionPage /></ProtectedRoute>} />
+        <Route path="/ask" element={<ProtectedRoute><AskQuestionPage /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
 
-       <Route path="/history" element={<HistoryPage />} />
+        <Route path="/history" element={<HistoryPage />} />
 
       </Routes>
     </BrowserRouter>

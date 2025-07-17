@@ -31,7 +31,7 @@ const userSlice = createSlice({
       state.token = null;
       state.role = null;
       state.phone = null;
-       localStorage.clear();
+      
 
       localStorage.removeItem('token');
       localStorage.removeItem('role');

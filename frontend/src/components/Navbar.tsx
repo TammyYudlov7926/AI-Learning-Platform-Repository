@@ -4,10 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { logout } from '../features/user/userSlice';
 import '../styles/Navbar.css';
+import { useLocation } from 'react-router-dom';
+
+
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const { phone, role, token } = useSelector((state: RootState) => state.user);
 
   const handleLogout = () => {
@@ -24,17 +29,19 @@ const Navbar: React.FC = () => {
       {isLoggedIn && (
         <div className="nav-center">
           <Link to="/history">History</Link>
-          <Link to="/settings">Settings</Link>
           <Link to="/ask">Ask AI</Link>
-         
 
 
-{role === 'ADMIN' && (
-  <>
-    <Link to="/admin/profile">Admin</Link>
-    <Link to="/admin">Dashboard</Link>
-  </>
-)}
+
+          {role === 'ADMIN' && (
+            <>
+              <Link to="/admin/profile">Profile</Link>
+              <Link to="/admin">Dashboard</Link>
+            </>
+          )}
+          {role !== 'ADMIN' && (
+            <Link to="/user/profile">Profile</Link>
+          )}
         </div>
       )}
 
@@ -45,10 +52,12 @@ const Navbar: React.FC = () => {
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
           </>
         ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
+          !isHome && (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )
         )}
       </div>
     </nav>
