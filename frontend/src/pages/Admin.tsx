@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import '../styles/Admin.css';
 
 interface User {
@@ -22,25 +22,31 @@ const Admin: React.FC = () => {
   const [error, setError] = useState('');
   const [promptsMap, setPromptsMap] = useState<{ [userId: number]: Prompt[] }>({});
   const [openPromptIds, setOpenPromptIds] = useState<Set<number>>(new Set());
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get('http://localhost:8000/api/admin/users', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUsers(res.data);
-      } catch (err: any) {
-        setError(err.response?.data?.error || 'Failed to fetch users');
-      }
-    };
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/api/admin/users', {
+        params: { search, page, limit: 5 },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(res.data.users);
+      setTotalPages(res.data.totalPages);
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to fetch users');
+    }
+  };
 
+  useEffect(() => {
     fetchUsers();
-  }, [token]);
+  }, [search, page]);
 
   const togglePrompts = async (userId: number) => {
     const newOpen = new Set(openPromptIds);
@@ -50,12 +56,9 @@ const Admin: React.FC = () => {
       newOpen.add(userId);
       if (!promptsMap[userId]) {
         try {
-          const res = await axios.get(
-            `http://localhost:8000/api/admin/users/${userId}/prompts`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
+          const res = await axios.get(`http://localhost:8000/api/admin/users/${userId}/prompts`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
           setPromptsMap((prev) => ({ ...prev, [userId]: res.data }));
         } catch (err: any) {
           setError(err.response?.data?.error || 'Failed to fetch prompts');
@@ -67,12 +70,9 @@ const Admin: React.FC = () => {
 
   const handleDeleteUser = async (userId: number) => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
-
     try {
       await axios.delete(`http://localhost:8000/api/admin/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(users.filter((u) => u.id !== userId));
       const copy = { ...promptsMap };
@@ -89,11 +89,19 @@ const Admin: React.FC = () => {
   return (
     <div className="admin-container">
       <h1>Admin Dashboard</h1>
-        <button className="admin-profile-btn" onClick={() => navigate('/admin/profile')}>
-   admin-profile
-  </button>
+      <button className="admin-profile-btn" onClick={() => navigate('/admin/profile')}>
+        admin-profile
+      </button>
 
       {error && <p className="error-message">{error}</p>}
+
+      <input
+        type="text"
+        placeholder="🔍 חפש לפי שם..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="search-input"
+      />
 
       <section className="users-management">
         <h2>Users Management</h2>
@@ -102,6 +110,7 @@ const Admin: React.FC = () => {
             <tr>
               <th>User</th>
               <th>Role</th>
+              <th>Created</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -129,10 +138,6 @@ const Admin: React.FC = () => {
                     >
                       {openPromptIds.has(user.id) ? 'Hide' : 'View'}
                     </button>
-
-
-
-
                     <button
                       title="Delete User"
                       className="action-btn delete"
@@ -163,6 +168,16 @@ const Admin: React.FC = () => {
             ))}
           </tbody>
         </table>
+
+        <div className="pagination-controls">
+          <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>
+          ← Previous
+</button>
+<span>Page {page} of {totalPages}</span>
+          <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>
+            next →
+          </button>
+        </div>
       </section>
     </div>
   );

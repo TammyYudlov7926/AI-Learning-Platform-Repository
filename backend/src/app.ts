@@ -7,11 +7,17 @@ import promptRoutes from './routes/prompt.routes';
 import authRoutes from './routes/auth.routes';
 import adminRoutes from './routes/admin.routes';
 import { errorHandler } from './middleware/errorHandler';
+import { setupSwagger } from './swagger';
+
 import 'dotenv/config';
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+
+
+setupSwagger(app);
 app.get('/', (req, res) => {
   res.send('API is working!');
 });
