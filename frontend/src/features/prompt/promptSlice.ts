@@ -1,6 +1,6 @@
 // src/features/prompts/promptSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getUserPrompts } from '../../api/authService';
+import { getUserPrompts } from '../../api/PromptService';
 
 export const fetchUserPrompts = createAsyncThunk(
   'prompts/fetchUserPrompts',

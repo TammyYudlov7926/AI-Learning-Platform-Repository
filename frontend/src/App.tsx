@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import AskQuestionPage from './pages/AskQuestionPage';
 import AdminProfile from './components/Admin/AdminProfile';
 
+import Footer from './components/Footer';
 
 import AdminDashboard from './pages/Admin';
 import Navbar from './components/Navbar';
@@ -32,6 +33,8 @@ function App() {
         <Route path="/history" element={<HistoryPage />} />
 
       </Routes>
+              <Footer />
+
     </BrowserRouter>
   );
 }

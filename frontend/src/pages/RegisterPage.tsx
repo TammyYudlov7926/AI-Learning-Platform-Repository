@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../features/user/userSlice';
-import { registerUser, loginUser } from '../api/authService';
+import { registerUser } from '../api/userService';
+import {  loginUser } from '../api/LoginService';
 import '../styles/auth.css';
 
 const RegisterPage = () => {

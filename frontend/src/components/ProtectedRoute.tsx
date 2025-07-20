@@ -1,7 +1,7 @@
 // src/components/ProtectedRoute.tsx
 import React, { JSX } from 'react';
 import { Navigate } from 'react-router-dom';
-import { isAuthenticated } from '../utils/auth'; // נניח שיש לך פונקציה כזו לבדוק אם המשתמש מחובר
+import { isAuthenticated } from '../utils/auth'; 
 
 interface Props {
   children: JSX.Element;

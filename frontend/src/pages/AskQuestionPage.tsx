@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import {
   getCategories,
-  getSubCategories,
-  createPrompt,
+  getSubCategories
+ 
 } from '../api/authService';
+import { createPrompt } from '../api/PromptService';
+
 import '../styles/AskQuestionPage.css';
 
 const AskQuestionPage: React.FC = () => {
