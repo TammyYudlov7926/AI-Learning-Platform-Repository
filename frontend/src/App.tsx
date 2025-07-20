@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import AskQuestionPage from './pages/AskQuestionPage';
 import AdminProfile from './components/Admin/AdminProfile';
 
+import Footer from './components/Footer';
 
 import AdminDashboard from './pages/Admin';
 import Navbar from './components/Navbar';
@@ -26,12 +27,14 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/ask" element={<ProtectedRoute><AskQuestionPage /></ProtectedRoute>} />
-        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-        <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin/profile" element={<ProtectedRoute adminOnly><AdminProfile /></ProtectedRoute>} />
 
         <Route path="/history" element={<HistoryPage />} />
 
       </Routes>
+              <Footer />
+
     </BrowserRouter>
   );
 }

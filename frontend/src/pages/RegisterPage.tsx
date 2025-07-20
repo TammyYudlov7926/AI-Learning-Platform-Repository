@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/redux';
 import { loginSuccess } from '../features/user/userSlice';
-import { registerUser, loginUser } from '../api/authService';
+import { authAPI } from '../api/auth.api';
 import '../styles/auth.css';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -17,23 +17,22 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
 
   const handleRegister = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    await registerUser(name, phone, password);
-    const { token, role } = await loginUser(phone, password);
-    dispatch(loginSuccess({ token, role, phone }));
-    if (role === 'ADMIN') navigate('/admin');
-    else navigate('/ask');
-  } catch (err: any) {
-    console.error(err);
-    if (err.response?.status === 409) {
-      setError('This phone number is already registered.');
-    } else {
-      setError('Registration failed or login failed');
+    e.preventDefault();
+    try {
+      await authAPI.register(name, phone, password);
+      const { token, role } = await authAPI.login(phone, password);
+      dispatch(loginSuccess({ token, role, phone }));
+      if (role === 'ADMIN') navigate('/admin');
+      else navigate('/ask');
+    } catch (err: any) {
+      console.error(err);
+      if (err.response?.status === 409) {
+        setError('This phone number is already registered.');
+      } else {
+        setError('Registration failed or login failed');
+      }
     }
-  }
-};
-;
+  };
 
   return (
     <div className="auth-outer-wrapper">

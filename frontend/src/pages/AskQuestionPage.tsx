@@ -1,41 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import {
-  getCategories,
-  getSubCategories,
-  createPrompt,
-} from '../api/authService';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { fetchCategories, fetchSubCategories } from '../features/categories/categoriesSlice';
+import { createPrompt, clearCurrentResponse } from '../features/prompt/promptSlice';
 import '../styles/AskQuestionPage.css';
 
 const AskQuestionPage: React.FC = () => {
-  const { phone } = useSelector((state: RootState) => state.user);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const dispatch = useAppDispatch();
+  const { phone } = useAppSelector((state) => state.user);
+  const { categories, subCategories, loading: categoriesLoading } = useAppSelector((state) => state.categories);
+  const { loading: promptLoading, currentResponse } = useAppSelector((state) => state.prompts);
+  
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(null);
   const [prompt, setPrompt] = useState('');
-  const [response, setResponse] = useState('');
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cats = await getCategories();
-      setCategories(cats);
-      const subs = await getSubCategories();
-      setSubCategories(subs);
+    dispatch(fetchCategories());
+    dispatch(fetchSubCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCurrentResponse());
     };
-    fetchData();
-  }, []);
+  }, [dispatch]);
 
   const handleAsk = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedCategory || !selectedSubCategory || !prompt) return;
 
-    setLoading(true);
-    const res = await createPrompt(selectedCategory, selectedSubCategory, prompt);
-    setResponse(res.response);
-    setLoading(false);
+    dispatch(createPrompt({ categoryId: selectedCategory, subCategoryId: selectedSubCategory, prompt }));
+    setPrompt('');
+    setSelectedCategory(null);
+    setSelectedSubCategory(null);
   };
 
   return (
@@ -77,16 +74,16 @@ const AskQuestionPage: React.FC = () => {
               required
             />
 
-            <button type="submit" disabled={loading}>
-              {loading ? 'Thinking...' : 'Ask'}
+            <button type="submit" disabled={promptLoading || categoriesLoading}>
+              {promptLoading ? 'Thinking...' : 'Ask'}
             </button>
           </form>
         </div>
 
-        {response && (
+        {currentResponse && (
           <div className="ai-response">
             <h3>AI Answer:</h3>
-            <p>{response}</p>
+            <p>{currentResponse}</p>
           </div>
         )}
       </div>

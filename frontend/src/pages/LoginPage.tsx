@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../api/authService';
-import { useDispatch } from 'react-redux';
+import { authAPI } from '../api/auth.api';
+import { useAppDispatch } from '../hooks/redux';
 import { loginSuccess } from '../features/user/userSlice';
 import '../styles/auth.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +18,7 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token, role } = await loginUser(phone, password);
+      const { token, role } = await authAPI.login(phone, password);
 
       dispatch(loginSuccess({ token, role, phone }));
 

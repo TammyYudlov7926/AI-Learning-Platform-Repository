@@ -1,18 +1,16 @@
-// src/pages/HistoryPage.tsx
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchUserPrompts } from '../features/prompt/promptSlice';
-import { RootState } from '../store';
 import '../styles/HistoryPage.css';
 
 const HistoryPage: React.FC = () => {
-  const dispatch = useDispatch();
-  const userPhone = useSelector((state: RootState) => state.user.phone);
-  const { prompts, loading, error } = useSelector((state: RootState) => state.prompts);
+  const dispatch = useAppDispatch();
+  const userPhone = useAppSelector((state) => state.user.phone);
+  const { prompts, loading, error } = useAppSelector((state) => state.prompts);
 
   useEffect(() => {
     if (userPhone) {
-      dispatch(fetchUserPrompts(userPhone) as any);
+      dispatch(fetchUserPrompts(userPhone));
     }
   }, [dispatch, userPhone]);
 

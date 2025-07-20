@@ -29,7 +29,7 @@ const Admin: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  const fetchUsers = async () => {
+  const fetchUsers = React.useCallback(async () => {
     try {
       const res = await axios.get('http://localhost:8000/api/admin/users', {
         params: { search, page, limit: 5 },
@@ -42,11 +42,11 @@ const Admin: React.FC = () => {
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to fetch users');
     }
-  };
+  }, [search, page, token]);
 
   useEffect(() => {
     fetchUsers();
-  }, [search, page]);
+  }, [fetchUsers]);
 
   const togglePrompts = async (userId: number) => {
     const newOpen = new Set(openPromptIds);
