@@ -34,10 +34,11 @@ git clone https://github.com/your-username/learning-platform.git
 cd learning-platform
 ```
 
-2. Copy env file:
+2. Copy env file & add your OpenAI API key:
 
 ```bash
 cp backend/.env.example backend/.env
+# Edit backend/.env and replace 'your_openai_key' with your actual OpenAI API key
 ```
 
 3. Run all services:
@@ -108,6 +109,8 @@ frontend/
 DATABASE_URL=postgresql://myuser:mypass@db:5432/learning_db?sslmode=disable
 OPENAI_API_KEY=your_openai_key
 JWT_SECRET=super_secret_key
+PORT=8000
+```
 
 ---
 
@@ -161,7 +164,7 @@ Response:
 ## 📌 Assumptions
 
 - Users identified by phone number + password
-- Admins created  seeded
+- Admins created via seeding
 - Error handling + validation in place
 - Swagger UI only available in dev
 
